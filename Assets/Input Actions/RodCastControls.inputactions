@@ -1,0 +1,34 @@
+{
+    "name": "RodCastControls",
+    "maps": [
+        {
+            "name": "RodCast",
+            "id": "662f7228-5409-47fb-9ae2-854b8b276ad6",
+            "actions": [
+                {
+                    "name": "MoveAlongArc",
+                    "type": "Button",
+                    "id": "c25de209-97ad-46d6-9492-1b2f2e64c69a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7526c8c6-be4a-45af-8f31-0c34465425a6",
+                    "path": "<XRInputV1::Oculus::OculusTouchControllerOpenXR>{RightHand}/primarybutton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveAlongArc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

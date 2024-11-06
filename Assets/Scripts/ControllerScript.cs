@@ -111,6 +111,7 @@ public class RayCastVisible : MonoBehaviour
 
     void OnMoveAlongArcPerformed(InputAction.CallbackContext context)
     {
+        Debug.Log("Move Along Arc action performed"); // Debugging check
         // Trigger movement only if not already moving and an object is hit by RayCast
         if (!isMoving && RaycastHitObject())
         {

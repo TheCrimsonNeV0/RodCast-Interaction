@@ -263,7 +263,7 @@ MonoBehaviour:
   sineFrequency: 1
   sineAmplitude: 2
   travelSpeed: 5
-  moveAlongArcAction: {fileID: 3279264004350380116, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  moveAlongArcAction: {fileID: 1457276714430880815, guid: fc0f3d5dff083d5499ecabf1ac86387a, type: 3}
 --- !u!120 &317467849
 LineRenderer:
   serializedVersion: 2
