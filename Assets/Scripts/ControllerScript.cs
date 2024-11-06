@@ -115,8 +115,43 @@ public class RayCastVisible : MonoBehaviour
         // Trigger movement only if not already moving and an object is hit by RayCast
         if (!isMoving && RaycastHitObject())
         {
-            StartCoroutine(MoveObjectAlongArc());
+            int pointsInsideObject = CheckPointsWithinObject();
+            if (0 < pointsInsideObject)
+            {
+                Debug.Log("Number of points inside the object: " + pointsInsideObject);
+                StartCoroutine(MoveObjectAlongArc());
+            }
         }
+    }
+
+    int CheckPointsWithinObject()
+    {
+        int count = 0;
+
+        if (objectToMove != null)
+        {
+            Collider objectCollider = objectToMove.GetComponent<Collider>();
+            if (objectCollider != null)
+            {
+                // Reverse the pointsAlongLine list
+                List<Vector3> reversedPoints = new List<Vector3>(pointsAlongLine);
+                reversedPoints.Reverse();
+
+                // Calculate the number of points in the first quarter
+                int quarterCount = reversedPoints.Count / 4;
+
+                // Loop through the first quarter of the reversed points
+                for (int i = 0; i < quarterCount; i++)
+                {
+                    if (objectCollider.bounds.Contains(reversedPoints[i]))
+                    {
+                        count++;
+                    }
+                }
+            }
+        }
+
+        return count;
     }
 
     IEnumerator MoveObjectAlongArc()
