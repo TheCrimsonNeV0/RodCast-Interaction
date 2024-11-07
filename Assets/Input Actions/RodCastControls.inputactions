@@ -19,7 +19,7 @@
                 {
                     "name": "",
                     "id": "7526c8c6-be4a-45af-8f31-0c34465425a6",
-                    "path": "<XRInputV1::Oculus::OculusTouchControllerOpenXR>{RightHand}/primarybutton",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
