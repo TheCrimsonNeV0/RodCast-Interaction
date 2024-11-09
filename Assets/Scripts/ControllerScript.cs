@@ -116,9 +116,9 @@ public class RayCastVisible : MonoBehaviour
         if (!isMoving && RaycastHitObject())
         {
             int pointsInsideObject = CheckPointsWithinObject();
+            Debug.Log("Number of points inside the object: " + pointsInsideObject);
             if (0 < pointsInsideObject)
             {
-                Debug.Log("Number of points inside the object: " + pointsInsideObject);
                 StartCoroutine(MoveObjectAlongArc());
             }
         }
