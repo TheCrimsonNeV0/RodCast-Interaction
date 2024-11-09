@@ -104,6 +104,14 @@ public class RayCastVisible : MonoBehaviour
         {
             Debug.Log("Hit: " + hit.collider.name);
             objectToMove = hit.collider.gameObject; // Assign the first hit object to objectToMove
+
+            // Check if the objectToMove has the "non_interactable" tag
+            if (objectToMove.CompareTag("non_interactable"))
+            {
+                objectToMove = null; // Reset objectToMove if it has the "non_interactable" tag
+                return false;
+            }
+
             return true;
         }
         return false;
@@ -155,45 +163,45 @@ public class RayCastVisible : MonoBehaviour
     }
 
     IEnumerator MoveObjectAlongArc()
-{
-    isMoving = true;
-
-    // Disable the LineRenderer when starting the movement
-    lineRenderer.enabled = false;
-
-    // Disable gravity if the object has a Rigidbody
-    Rigidbody rb = objectToMove.GetComponent<Rigidbody>();
-    if (rb != null)
     {
-        rb.useGravity = false;
-        rb.isKinematic = true;
-    }
+        isMoving = true;
 
-    // Use a local copy of the arc points to avoid modification issues
-    List<Vector3> arcPointsCopy = new List<Vector3>(pointsAlongLine);
-    arcPointsCopy.Reverse();
+        // Disable the LineRenderer when starting the movement
+        lineRenderer.enabled = false;
 
-    // Move along each point in the arc
-    foreach (Vector3 point in arcPointsCopy)
-    {
-        while (Vector3.Distance(objectToMove.transform.position, point) > 0.01f)
+        // Disable gravity if the object has a Rigidbody
+        Rigidbody rb = objectToMove.GetComponent<Rigidbody>();
+        if (rb != null)
         {
-            objectToMove.transform.position = Vector3.MoveTowards(objectToMove.transform.position, point, travelSpeed * Time.deltaTime);
-            yield return null; // Wait until the next frame to continue moving
+            rb.useGravity = false;
+            rb.isKinematic = true;
         }
-    }
 
-    // Re-enable gravity and LineRenderer after movement
-    if (rb != null)
-    {
-        rb.useGravity = true;
-        rb.isKinematic = false;
-    }
-    
-    lineRenderer.enabled = true; // Re-enable the LineRenderer
+        // Use a local copy of the arc points to avoid modification issues
+        List<Vector3> arcPointsCopy = new List<Vector3>(pointsAlongLine);
+        arcPointsCopy.Reverse();
 
-    isMoving = false;
-}
+        // Move along each point in the arc
+        foreach (Vector3 point in arcPointsCopy)
+        {
+            while (Vector3.Distance(objectToMove.transform.position, point) > 0.01f)
+            {
+                objectToMove.transform.position = Vector3.MoveTowards(objectToMove.transform.position, point, travelSpeed * Time.deltaTime);
+                yield return null; // Wait until the next frame to continue moving
+            }
+        }
+
+        // Re-enable gravity and LineRenderer after movement
+        if (rb != null)
+        {
+            rb.useGravity = true;
+            rb.isKinematic = false;
+        }
+
+        lineRenderer.enabled = true; // Re-enable the LineRenderer
+
+        isMoving = false;
+    }
 
     private void OnDisable()
     {
